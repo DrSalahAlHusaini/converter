@@ -560,3 +560,87 @@
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>محولات النصوص بين اللاتينية والعربية</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* تنسيقات سابقة... */
+    
+    /* تنسيق جديد لعداد الزوار */
+    .visitor-counter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(52, 152, 219, 0.9);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+    
+    .visitor-counter i {
+      margin-left: 8px;
+    }
+    
+    @media (max-width: 768px) {
+      .visitor-counter {
+        bottom: 10px;
+        right: 10px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- المحتوى السابق... -->
+
+  <!-- عداد الزوار -->
+  <div class="visitor-counter" id="visitorCounter">
+    <i class="fas fa-users"></i>
+    <span id="counterValue">0</span> زائر
+  </div>
+  <script>
+    // دالة عداد الزوار
+    function updateVisitorCounter() {
+      // التحقق مما إذا كان localStorage مدعومًا
+      if (typeof(Storage) !== "undefined") {
+        // الحصول على عدد الزوار الحالي أو تهيئته إذا لم يكن موجودًا
+        let visitCount = localStorage.getItem('visitCount');
+        
+        if (visitCount) {
+          visitCount = parseInt(visitCount) + 1;
+        } else {
+          visitCount = 1;
+        }
+        
+        // حفظ القيمة المحدثة
+        localStorage.setItem('visitCount', visitCount);
+        
+        // عرض عدد الزوار
+        document.getElementById('counterValue').textContent = visitCount.toLocaleString();
+        
+        // إرسال البيانات إلى السيرفر (إن أردت تتبع أكثر دقة)
+        // يمكنك إضافة كود AJAX هنا لإرسال البيانات إلى سيرفرك
+      }
+    }
+    
+    // تحديث العداد عند تحميل الصفحة
+    window.onload = function() {
+      updateVisitorCounter();
+      
+      // يمكنك إضافة هذا إذا أردت تحديث العداد كل 5 دقائق (اختياري)
+      setInterval(updateVisitorCounter, 300000); // 300000 مللي ثانية = 5 دقائق
+    };
+
+    // الدوال السابقة لتحويل النصوص...
+  </script>
+</body>
+</html>
